@@ -3,11 +3,11 @@ using System.Security.Cryptography;
 namespace Mela.AuthService.Api.Services;
 
 /// <summary>
-///     Реализация <see cref="IPasswordHashService"/>
+///     Класс для шифрования паролей пользователей
 /// </summary>
-public class PasswordHashService
+public static class PasswordHashHelper
 {
-    public string ComputeHash(string password)
+    public static string ComputeHash(string password)
     {
         using var rng = RandomNumberGenerator.Create();
         var salt = new byte[16];
@@ -23,7 +23,7 @@ public class PasswordHashService
         return Convert.ToBase64String(bytes);
     }
 
-    public bool ValidateHash(string password, string hashedPassword)
+    public static bool ValidateHash(string password, string hashedPassword)
     {
         var correctHash = Convert.FromBase64String(hashedPassword);
 

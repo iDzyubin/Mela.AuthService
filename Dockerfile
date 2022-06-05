@@ -1,11 +1,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
 
-WORKDIR src/Mela.DoctorService.Api/
+WORKDIR src/Mela.AuthService.Api/
 
-COPY src/Mela.DoctorService.Api/*.csproj .
-RUN dotnet restore Mela.DoctorService.Api.csproj
+COPY src/Mela.AuthService.Api/*.csproj .
+RUN dotnet restore Mela.AuthService.Api.csproj
 
-COPY src/Mela.DoctorService.Api .
+COPY src/Mela.AuthService.Api .
 RUN dotnet publish -c Release -o out \
                  --runtime alpine-x64 \
                  --self-contained true \
@@ -15,7 +15,7 @@ RUN dotnet publish -c Release -o out \
 FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-alpine AS publish
 
 WORKDIR /app
-COPY --from=build /src/Mela.DoctorService.Api/out .
+COPY --from=build /src/Mela.AuthService.Api/out .
 
 EXPOSE 80
-ENTRYPOINT ["./Mela.DoctorService.Api"]
+ENTRYPOINT ["./Mela.AuthService.Api"]
