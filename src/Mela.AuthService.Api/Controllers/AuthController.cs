@@ -24,7 +24,7 @@ public class AuthController : ControllerBase
     ///     Авторизация пользователя
     /// </summary>
     [HttpPost]
-    public async Task<IActionResult> SingIn(SignInRequest request, [FromServices] UserContext context)
+    public async Task<IActionResult> SingIn([FromForm] SignInRequest request, [FromServices] UserContext context)
     {
         var user = await context.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
         if (user == null) return NotFound();
@@ -46,7 +46,7 @@ public class AuthController : ControllerBase
     ///     Регистрация пользователя
     /// </summary>
     [HttpPost]
-    public async Task<IActionResult> SignUp(SignUpRequest request, [FromServices] UserContext context)
+    public async Task<IActionResult> SignUp([FromForm] SignUpRequest request, [FromServices] UserContext context)
     {
         var user = await context.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
         if (user != null) return BadRequest("Пользователь с таким Email уже существует");
@@ -68,7 +68,7 @@ public class AuthController : ControllerBase
     ///     Подтверждение пользователя с помощью кода из сообщения
     /// </summary>
     [HttpPost]
-    public async Task<IActionResult> Confirm(ConfirmRequest request, [FromServices] UserContext context)
+    public async Task<IActionResult> Confirm([FromForm] ConfirmRequest request, [FromServices] UserContext context)
     {
         var user = await context.Users.FirstOrDefaultAsync(x => !x.IsDeleted && x.Email == request.Email);
         if (user == null) return BadRequest();
