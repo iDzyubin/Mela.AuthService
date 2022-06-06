@@ -20,7 +20,7 @@ public class ConfirmRequestValidator : AbstractValidator<ConfirmRequest>
             .WithMessage(MatchMessage)
             .WithName("Адрес электронной почты");
 
-        RuleFor(x => x.Email)
+        RuleFor(x => x.ConfirmCode)
             .NotEmpty()
             .WithMessage(RequiredMessage)
             .Must(code => Regex.IsMatch(input: code, pattern: @"\d{6}"))

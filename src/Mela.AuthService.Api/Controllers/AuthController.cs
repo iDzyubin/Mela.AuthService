@@ -24,7 +24,7 @@ public class AuthController : ControllerBase
     ///     Авторизация пользователя
     /// </summary>
     [HttpPost]
-    public async Task<IActionResult> SingIn([FromForm] SignInRequest request, [FromServices] UserContext context)
+    public async Task<IActionResult> SignIn([FromForm] SignInRequest request, [FromServices] UserContext context)
     {
         var user = await context.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
         if (user == null) return NotFound();
@@ -100,7 +100,8 @@ public class AuthController : ControllerBase
         };
         
         await new HttpClient().PostAsync(
-            "http://0.0.0.0:10004/api/mail/send", 
+            "http://localhost:10000/mail/send", 
+            // "http://mail_service:80/api/mail/send", 
             new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, MediaTypeNames.Application.Json));
 
         return confirmCode;
