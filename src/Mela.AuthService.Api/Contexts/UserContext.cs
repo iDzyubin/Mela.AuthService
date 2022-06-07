@@ -1,5 +1,5 @@
 using Mela.AuthService.Api.Entities;
-using Mela.AuthService.Api.Services;
+using Mela.AuthService.Api.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mela.AuthService.Api.Contexts;
@@ -24,8 +24,9 @@ public sealed class UserContext : DbContext
             {
                 Id = 1,
                 Email = "admin@mela.ru",
-                Password = PasswordHashHelper.ComputeHash("password"),
-                Status = UserStatus.Admin,
+                Password = PasswordHashHelper.ComputeHash("knv#&%9R321"),
+                Status = UserStatus.Confirmed,
+                Type = UserType.Admin,
                 ConfirmCode = PasswordHashHelper.ComputeHash("123345")
             });
     }

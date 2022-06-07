@@ -16,6 +16,11 @@ public class User : Entity
     ///     Статус пользователя
     /// </summary>
     public UserStatus Status { get; set; } = UserStatus.Unknown;
+
+    /// <summary>
+    ///     Тип пользователя
+    /// </summary>
+    public UserType Type { get; set; }
     
     /// <summary>
     ///     Код подтверждения

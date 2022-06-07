@@ -2,6 +2,7 @@ using System.Reflection;
 using FluentValidation.AspNetCore;
 using Mela.AuthService.Api.Contexts;
 using Mela.AuthService.Api.Options;
+using Mela.AuthService.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -17,7 +18,8 @@ public static class ServiceCollectionExtensions
             .AddAutomapper()
             .AddValidation()
             .AddJwtAuthentication()
-            .AddSwaggerGenerator();
+            .AddSwaggerGenerator()
+            .AddMailService();
     
     private static IServiceCollection AddDatabase(this IServiceCollection services, WebApplicationBuilder builder) => services
         .AddDbContext<UserContext>(options => options.UseNpgsql(
@@ -31,6 +33,9 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddValidation(this IServiceCollection services) => services
         .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssembly(TargetAssembly));
 
+    private static IServiceCollection AddMailService(this IServiceCollection services) => services
+        .AddScoped<IMailService, MailService>();
+    
     private static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
     {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

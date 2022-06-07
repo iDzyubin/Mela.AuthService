@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace Mela.AuthService.Api.Services;
+namespace Mela.AuthService.Api.Helpers;
 
 /// <summary>
 ///     Класс для шифрования паролей пользователей

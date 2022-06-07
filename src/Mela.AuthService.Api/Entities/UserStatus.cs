@@ -1,5 +1,8 @@
 namespace Mela.AuthService.Api.Entities;
 
+/// <summary>
+///     Статус пользователя
+/// </summary>
 public enum UserStatus
 {
     /// <summary>
@@ -15,10 +18,5 @@ public enum UserStatus
     /// <summary>
     ///     Подтвержденный пользователь
     /// </summary>
-    Confirmed = 2,
-    
-    /// <summary>
-    ///     Администратор
-    /// </summary>
-    Admin = 3,
+    Confirmed = 2
 }
