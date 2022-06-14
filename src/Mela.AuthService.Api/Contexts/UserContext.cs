@@ -19,15 +19,14 @@ public sealed class UserContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>().HasData(
-            new User
-            {
-                Id = 1,
-                Email = "admin@mela.ru",
-                Password = PasswordHashHelper.ComputeHash("knv#&%9R321"),
-                Status = UserStatus.Confirmed,
-                Type = UserType.Admin,
-                ConfirmCode = PasswordHashHelper.ComputeHash("123345")
-            });
+        modelBuilder.Entity<User>().HasData(new User
+        {
+            Id = 1,
+            Email = "admin@mela.ru",
+            Password = PasswordHashHelper.ComputeHash("knv#&%9R321"),
+            Status = UserStatus.Confirmed,
+            Type = UserType.Admin,
+            ConfirmCode = PasswordHashHelper.ComputeHash("123345")
+        });
     }
 }

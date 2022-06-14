@@ -1,4 +1,4 @@
-namespace Mela.AuthService.Api;
+namespace Mela.AuthService.Api.Responses;
 
 /// <summary>
 ///     Ответ на запрос регистрации пользователя
